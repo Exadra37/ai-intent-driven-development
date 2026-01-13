@@ -36,6 +36,61 @@
 - Events MUST have a clear business cause.
 - If causality is unclear, the event model is incomplete.
 
+## DOMAIN CONSTRAINTS: STATE TRANSITIONS
+
+### Definitions:
+- State transition: a valid change in domain state caused by an event.
+
+### Rules:
+- Events MUST represent valid state transitions in the domain.
+- Invalid or impossible transitions MUST NOT be represented as events.
+- Events MUST NOT implicitly “fix” prior invalid states.
+- Compensating events MUST be explicit and semantically clear.
+
+### DOMAIN CONSTRAINTS: COMPLETENESS & EXPLICITNESS
+
+### Rules:
+- Events MUST contain all information required to understand their business meaning.
+- Business-critical data MUST NOT be inferred from context, ordering, or metadata.
+- Absence of data MUST be explicit, not assumed.
+- If a business question cannot be answered from the event stream, the model is incomplete.
+
+## DOMAIN CONSTRAINTS: UBIQUITOUS LANGUAGE
+
+### Rules:
+- Event names MUST use domain terminology.
+- Technical or implementation terms MUST NOT appear in event names.
+- Field names MUST reflect business meaning, not storage concerns.
+- Synonyms MUST NOT be used for the same concept across events.
+
+## DOMAIN CONSTRAINTS: TEMPORAL CONSISTENCY
+
+### Rules:
+- Business timestamps MUST be internally consistent across related events.
+- An event MUST NOT occur before prerequisite business events.
+- Time-based relationships MUST be explicit (e.g., “effectiveFrom”, “validUntil”).
+- Retroactive events MUST explicitly state the period they affect.
+
+## DOMAIN CONSTRAINTS: CORRECTIONS & REVERSALS
+
+### Definitions:
+- Correction: an event that addresses a past mistake.
+- Reversal: an event that negates the effect of a prior event.
+
+### Rules:
+- Past events MUST NOT be modified or deleted.
+- Corrections MUST be represented as new, explicit events.
+- Reversals MUST reference the original event they negate.
+- Corrections MUST NOT obscure the original historical fact.
+
+## DOMAIN CONSTRAINTS: BUSINESS INVARIANTS
+
+### Rules:
+- Domain invariants MUST be enforced before emitting events.
+- Events MUST NOT violate business rules at the time they occurred.
+- Invariants MUST be expressed explicitly in the domain model.
+- If an invariant cannot be enforced, it must be observable in the event stream.
+
 ## ARCHITECTURAL CONSTRAINTS: EVENT SOURCING
 
 - Events are immutable facts and MUST NOT be changed after publication.
