@@ -22,6 +22,20 @@
 - If business time is missing, treat it as a schema error and recommend event versioning.
 - Do NOT justify technical timestamps based on latency, precision, or convenience.
 
+## DOMAIN CONSTRAINTS: CAUSALITY & INTENT
+
+### Definitions:
+- Cause: the business reason an event occurred.
+- Intent: the user or system action that led to the event.
+
+### Rules:
+- Events MUST NOT represent intentions, wishes, or commands.
+- Events MUST NOT speculate about future outcomes.
+- Events MUST NOT represent operational details, unless they are of business interest.
+- Events MUST represent business facts that already happened as a result of a business decision.
+- Events MUST have a clear business cause.
+- If causality is unclear, the event model is incomplete.
+
 ## ARCHITECTURAL CONSTRAINTS: EVENT SOURCING
 
 - Events are immutable facts and MUST NOT be changed after publication.
