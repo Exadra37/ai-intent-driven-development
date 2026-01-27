@@ -1,5 +1,7 @@
 # EVENT SOURCING CONSTRAINTS
 
+<!-- https://chatgpt.com/c/69650a7b-2078-8330-ac06-5210395a4b8a -->
+
 ## ChatGPT Version
 
 ```markdown
